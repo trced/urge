@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas">
+<link rel="stylesheet" href="_ds/trced-design-system-8ed502c7-1269-4a8b-abd9-dee8620921ac/tokens/tokens.css">
+<link rel="stylesheet" href="_ds/trced-design-system-8ed502c7-1269-4a8b-abd9-dee8620921ac/fonts/fonts.css">
+<link rel="stylesheet" href="_ds/trced-design-system-8ed502c7-1269-4a8b-abd9-dee8620921ac/_ds_bundle.css">
+<link rel="stylesheet" href="_ds/trced-design-system-8ed502c7-1269-4a8b-abd9-dee8620921ac/styles.css">
+<script src="_ds/trced-design-system-8ed502c7-1269-4a8b-abd9-dee8620921ac/_ds_bundle.js"></script>
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--color-bg); }
+  a { color: var(--color-ink); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+  a:hover { color: var(--color-bg); background: var(--color-ink); }
+</style>
+</helmet>
+
+<div style="min-height: 100dvh; display: flex; flex-direction: column; gap: var(--space-10); padding: var(--space-10) var(--screen-margin) var(--space-12); background: var(--color-bg); color: var(--color-ink); font-family: var(--font-family); font-size: var(--text-body); line-height: var(--leading-body);">
+
+  <header style="display: flex; flex-direction: column; gap: var(--space-2); padding-bottom: var(--space-4); border-bottom: var(--rule-width) solid var(--color-ink);">
+    <span class="t-brand">urge.</span>
+    <p class="t-body t-measure" style="margin: 0; color: var(--color-muted-strong);">Les deux cadres exécutent le même prototype, aux deux tailles où il change de forme. Tout y est cliquable : inscrire, répondre, ouvrir une ligne.</p>
+  </header>
+
+  <div style="display: flex; align-items: flex-start; gap: var(--space-8); flex-wrap: wrap;">
+
+    <section data-screen-label="téléphone" style="display: flex; flex-direction: column; gap: var(--space-3);">
+      <div style="display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-4);">
+        <p class="section-label section-label--strong" style="margin: 0;">téléphone</p>
+        <p class="t-meta t-muted" style="margin: 0;">390 × 844</p>
+      </div>
+      <div style="width: 392px; height: 846px; border: var(--rule-width) solid var(--color-ink); background: var(--color-bg);">
+        <iframe src="urge.dc.html" title="urge. sur téléphone" style="display: block; width: 390px; height: 844px; border: 0;"></iframe>
+      </div>
+      <ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: var(--space-1); max-width: 392px;">
+        <li class="t-meta t-muted">une colonne, un écran à la fois</li>
+        <li class="t-meta t-muted">la feuille d'inscription monte du bas, pleine largeur</li>
+        <li class="t-meta t-muted">l'action primaire reste collée sous le pouce</li>
+        <li class="t-meta t-muted">le bilan perd les libellés latéraux de sa navigation</li>
+      </ul>
+    </section>
+
+    <section data-screen-label="fenêtre" style="display: flex; flex-direction: column; gap: var(--space-3);">
+      <div style="display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-4);">
+        <p class="section-label section-label--strong" style="margin: 0;">fenêtre</p>
+        <p class="t-meta t-muted" style="margin: 0;">1440 × 900, affichée à 60 %</p>
+      </div>
+      <div style="width: 866px; height: 542px; overflow: hidden; border: var(--rule-width) solid var(--color-ink); background: var(--color-bg);">
+        <iframe src="urge.dc.html" title="urge. en fenêtre" style="display: block; width: 1440px; height: 900px; border: 0; transform: scale(0.6); transform-origin: top left;"></iframe>
+      </div>
+      <ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: var(--space-1); max-width: 866px;">
+        <li class="t-meta t-muted">deux panneaux : le registre à gauche, ce qu'on regarde à droite</li>
+        <li class="t-meta t-muted">ouvrir une ligne ne quitte pas le registre — la ligne reste marquée</li>
+        <li class="t-meta t-muted">bilan et réglages s'ouvrent dans le panneau, sans masquer la liste</li>
+        <li class="t-meta t-muted">la feuille se recentre à 480 px au lieu d'occuper le cadre</li>
+      </ul>
+    </section>
+  </div>
+
+  <p class="t-meta t-muted t-measure" style="margin: 0;">Le seuil est à 900 px : en dessous, le panneau de droite prend toute la place et la navigation du haut suffit à revenir.</p>
+</div>
+</x-dc>
+</body>
+</html>

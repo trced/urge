@@ -1,0 +1,104 @@
+name: Bug report
+description: Something in the app behaves differently from what it says it does.
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time. Please do not paste your `urge.json` or a
+        screenshot of your own register — what someone gave up on, and why,
+        says a great deal about them. A trimmed-down file with one or two
+        invented lines is enough to reproduce almost anything.
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened
+      description: What you saw, and what you expected instead.
+      placeholder: |
+        I wrote a line down at 23:30 and it was dated the next day.
+        I expected it to keep the day I was looking at.
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: Numbered, starting from a fresh register where possible.
+      placeholder: |
+        1. Open /app?demo=1
+        2. Settings, change the delay from 30 to 60 days
+        3. Go back to the register
+        4. A question that was due is no longer offered
+    validations:
+      required: true
+
+  - type: dropdown
+    id: view
+    attributes:
+      label: Where
+      description: Which part of the app. Pick more than one if it applies everywhere.
+      multiple: true
+      options:
+        - The register
+        - Writing a refusal down
+        - The question
+        - One urge in full
+        - The review
+        - Settings
+        - Import or export
+        - The first-run introduction
+        - Presentation site
+        - Everywhere or not sure
+    validations:
+      required: true
+
+  - type: input
+    id: browser
+    attributes:
+      label: Browser and version
+      placeholder: Firefox 141 on Linux, Safari 26 on iOS
+    validations:
+      required: true
+
+  - type: input
+    id: screen
+    attributes:
+      label: Window width
+      description: The layout changes at 900 px, so this narrows it down fast.
+      placeholder: about 390 px, phone
+    validations:
+      required: false
+
+  - type: input
+    id: settings
+    attributes:
+      label: Relevant settings
+      description: >
+        Delay before the question, when the question is asked, price asked for
+        or never. Several date bugs only show up on one combination.
+      placeholder: delay 60 days, question when I ask for it
+    validations:
+      required: false
+
+  - type: input
+    id: version
+    attributes:
+      label: App version
+      description: Settings, at the bottom.
+      placeholder: 0.1.0
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Before submitting
+      options:
+        - label: I searched the existing issues.
+          required: true
+        - label: This is a defect, not a missing feature.
+          required: true
+        - label: I have not included my own register data.
+          required: true

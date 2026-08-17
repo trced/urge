@@ -1,0 +1,73 @@
+name: Feature request
+description: Something urge. should do and does not.
+labels: [enhancement]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        urge. asks a single question: **do you still think about it?**
+        Features that do not serve that question are refused on purpose,
+        however good they are — wishlists, savings goals, price tracking,
+        budgets, streaks, scores and charts have all been considered and
+        turned down.
+
+        Two in particular. A **wishlist** turns the register inside out: a line
+        would then be waiting to be bought, and the thirty-day question would
+        become a purchase reminder. **"I bought it in the end"** would turn a
+        register into a regret. Those two refusals are not up for
+        rediscussion, but everything else is.
+
+        That is not a reason to stay quiet. It is a reason to answer the third
+        field below carefully.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: The problem
+      description: What you were trying to do, and what got in the way. Not the solution yet.
+      placeholder: |
+        I write down several refusals on the same shopping trip and cannot tell
+        them apart in the register afterwards.
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: What you would like instead
+      description: Be concrete. A sentence describing the screen is worth more than a feature name.
+    validations:
+      required: true
+
+  - type: textarea
+    id: fit
+    attributes:
+      label: How does this serve "do you still think about it?"
+      description: >
+        The filter every feature goes through. If the answer is that it would
+        help you spend less, save more, or measure yourself, this is probably
+        not the project for it — and that is fine.
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: What you tried instead
+      description: Existing settings, the review, the reason field, export to a spreadsheet. What was missing.
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Before submitting
+      options:
+        - label: I searched the existing issues.
+          required: true
+        - label: I read "What it is not" in the README.
+          required: true
+        - label: This works without an account, a server, or a network request.
+          required: true
+        - label: This adds no wishlist, savings figure, streak, score or reward.
+          required: true

@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/trced-design-system-8ed502c7-1269-4a8b-abd9-dee8620921ac/tokens/tokens.css">
+<link rel="stylesheet" href="_ds/trced-design-system-8ed502c7-1269-4a8b-abd9-dee8620921ac/fonts/fonts.css">
+<link rel="stylesheet" href="_ds/trced-design-system-8ed502c7-1269-4a8b-abd9-dee8620921ac/_ds_bundle.css">
+<link rel="stylesheet" href="_ds/trced-design-system-8ed502c7-1269-4a8b-abd9-dee8620921ac/styles.css">
+<script src="_ds/trced-design-system-8ed502c7-1269-4a8b-abd9-dee8620921ac/_ds_bundle.js"></script>
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--color-bg); }
+  ul.list { margin: 0; padding: 0; list-style: none; }
+  a { color: var(--color-ink); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+  a:hover { color: var(--color-bg); background: var(--color-ink); }
+</style>
+</helmet>
+
+<div ref="{{ shellRef }}" style="height: 100dvh; overflow: hidden; display: flex; flex-direction: column; background: var(--color-bg); color: var(--color-ink); font-family: var(--font-family); font-size: var(--text-body); line-height: var(--leading-body);">
+
+  <sc-if value="{{ isOnboarding }}" hint-placeholder-val="{{ false }}">
+    <section data-screen-label="premier lancement" style="flex: 1; min-height: 0; overflow-y: auto; display: flex; flex-direction: column; justify-content: space-between; gap: var(--space-10); padding: var(--space-10) var(--screen-margin) var(--space-8); max-width: var(--panel-measure);">
+      <p class="t-brand">urge.</p>
+      <div style="display: flex; flex-direction: column; gap: var(--space-5);">
+        <p class="t-meta t-muted">{{ onboardCount }}</p>
+        <sc-if value="{{ onboard0 }}" hint-placeholder-val="{{ true }}">
+          <div style="display: flex; flex-direction: column; gap: var(--space-4);">
+            <h1 class="t-display" style="margin: 0;">Ce n'est pas une liste d'envies.</h1>
+            <p class="t-body t-measure" style="margin: 0; color: var(--color-muted-strong);">Une envie s'inscrit ici au moment où vous y renoncez — jamais au moment où elle arrive. Une liste d'objets désirés serait une liste de courses déguisée.</p>
+          </div>
+        </sc-if>
+        <sc-if value="{{ onboard1 }}" hint-placeholder-val="{{ false }}">
+          <div style="display: flex; flex-direction: column; gap: var(--space-4);">
+            <h1 class="t-display" style="margin: 0;">Trente jours plus tard, une question.</h1>
+            <p class="t-body t-measure" style="margin: 0; color: var(--color-muted-strong);">Y pensez-vous encore ? Trois réponses possibles : oublié, vaguement, toujours. C'est cette réponse, et rien d'autre, qui dit quelque chose de vrai.</p>
+          </div>
+        </sc-if>
+        <sc-if value="{{ onboard2 }}" hint-placeholder-val="{{ false }}">
+          <div style="display: flex; flex-direction: column; gap: var(--space-4);">
+            <h1 class="t-display" style="margin: 0;">Rien ne sort d'ici.</h1>
+            <p class="t-body t-measure" style="margin: 0; color: var(--color-muted-strong);">Le registre reste sur cet appareil. Aucun compte, aucune synchronisation, aucun prix suivi. Le total existe, mais il ne vous est jamais présenté comme une économie.</p>
+          </div>
+        </sc-if>
+      </div>
+      <div style="display: flex; align-items: center; gap: var(--space-6);">
+        <x-import component-from-global-scope="TrcedDS.Button" variant="quiet" on-click="{{ skipOnboard }}" hint-size="auto,44px">passer</x-import>
+        <x-import component-from-global-scope="TrcedDS.Button" variant="primary" on-click="{{ nextOnboard }}" hint-size="auto,44px">{{ onboardCta }}</x-import>
+      </div>
+    </section>
+  </sc-if>
+
+  <sc-if value="{{ inApp }}" hint-placeholder-val="{{ true }}">
+    <div style="flex: 1; min-height: 0; display: flex; flex-direction: column; width: 100%; max-width: var(--container-max);">
+
+        <header style="display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-4); padding: var(--space-6) var(--screen-margin) var(--space-3); border-bottom: var(--rule-width) solid var(--color-ink);">
+          <span class="t-brand">urge.</span>
+          <nav style="display: flex; align-items: center; gap: var(--space-5);">
+            <x-import component-from-global-scope="TrcedDS.Button" variant="{{ navRegistre }}" on-click="{{ goRegistre }}" hint-size="auto,44px">registre</x-import>
+            <x-import component-from-global-scope="TrcedDS.Button" variant="{{ navBilan }}" on-click="{{ goBilan }}" hint-size="auto,44px">bilan</x-import>
+            <x-import component-from-global-scope="TrcedDS.Button" variant="{{ navReglages }}" on-click="{{ goReglages }}" hint-size="auto,44px">réglages</x-import>
+          </nav>
+        </header>
+
+      <div class="app--page" style="flex: 1; min-height: 0; display: flex; position: relative;">
+
+        <sc-if value="{{ mainVisible }}" hint-placeholder-val="{{ true }}">
+        <main style="flex: 1 1 var(--app-list-width); min-width: 0; min-height: 0; max-width: var(--app-list-width); display: flex; flex-direction: column; border-right: var(--rule-width) solid var(--color-rule);">
+
+        <sc-if value="{{ mainVisible }}" hint-placeholder-val="{{ true }}">
+          <section data-screen-label="registre" style="flex: 1; min-height: 0; overflow: hidden; display: flex; flex-direction: column;">
+            <div style="padding: var(--space-6) var(--screen-margin) var(--space-4); display: flex; flex-direction: column; gap: var(--space-2);">
+              <h1 class="t-display" style="margin: 0;">le registre</h1>
+              <p class="t-meta t-muted" style="margin: 0;">{{ registreCount }}</p>
+            </div>
+
+            <div style="flex: 1; min-height: 0; overflow-y: auto; display: flex; flex-direction: column; gap: var(--space-4);">
+            <sc-if value="{{ hasNotice }}" hint-placeholder-val="{{ false }}">
+              <div style="border-top: var(--rule-width) solid var(--color-rule);">
+                <x-import component-from-global-scope="TrcedDS.Message" tone="neutral" title="{{ noticeTitle }}" body="{{ noticeBody }}" hint-size="100%,120px"></x-import>
+                <div style="padding: 0 var(--screen-margin) var(--space-4);">
+                  <x-import component-from-global-scope="TrcedDS.Button" variant="quiet" on-click="{{ clearNotice }}" hint-size="auto,44px">masquer</x-import>
+                </div>
+              </div>
+            </sc-if>
+
+            <sc-if value="{{ hasDue }}" hint-placeholder-val="{{ true }}">
+              <div style="padding: 0 var(--screen-margin); border-top: var(--rule-width) solid var(--color-rule);">
+                <x-import component-from-global-scope="TrcedDS.ActionRow" name="y pensez-vous encore ?" value="{{ dueLabel }}" on-click="{{ openQuestion }}" hint-size="100%,44px"></x-import>
+              </div>
+            </sc-if>
+
+            <div style="padding: var(--space-2) var(--screen-margin) var(--space-8); display: flex; flex-direction: column; gap: var(--space-2);">
+              <sc-if value="{{ isEmpty }}" hint-placeholder-val="{{ false }}">
+                <x-import component-from-global-scope="TrcedDS.EmptyState" title="Aucun renoncement inscrit." body="Inscrivez la prochaine envie à laquelle vous renoncez ; la question viendra trente jours plus tard." note="Le registre reste sur cet appareil." hint-size="100%,180px"></x-import>
+              </sc-if>
+
+              <sc-if value="{{ registreMele }}" hint-placeholder-val="{{ true }}">
+                <div>
+                  <p class="section-label">du plus récent au plus ancien</p>
+                  <ul class="list">
+                    <sc-for list="{{ rows }}" as="row" hint-placeholder-count="8">
+                      <li class="list__item">
+                        <sc-if value="{{ row.gap }}" hint-placeholder-val="{{ false }}">
+                          <x-import component-from-global-scope="TrcedDS.GapRow" label="{{ row.label }}" hint-size="100%,44px"></x-import>
+                        </sc-if>
+                        <sc-if value="{{ row.entry }}" hint-placeholder-val="{{ true }}">
+                          <x-import component-from-global-scope="TrcedDS.ListRow" row-key="{{ row.key }}" marker="{{ row.marker }}" title="{{ row.name }}" meta="{{ row.meta }}" extra="{{ row.extra }}" selected="{{ row.selected }}" on-click="{{ row.open }}" dc-props="{{ row.a11y }}" hint-size="100%,60px"></x-import>
+                        </sc-if>
+                      </li>
+                    </sc-for>
+                  </ul>
+                </div>
+              </sc-if>
+
+              <sc-if value="{{ registreVerdict }}" hint-placeholder-val="{{ false }}">
+                <div style="--row-key: 92px;">
+                  <p class="section-label">verdict · envie · date d'inscription</p>
+                  <ul class="list">
+                    <sc-for list="{{ verdictRows }}" as="row" hint-placeholder-count="8">
+                      <li class="list__item">
+                        <x-import component-from-global-scope="TrcedDS.ListRow" row-key="{{ row.key }}" marker="{{ row.marker }}" title="{{ row.name }}" meta="{{ row.meta }}" selected="{{ row.selected }}" on-click="{{ row.open }}" dc-props="{{ row.a11y }}" hint-size="100%,56px"></x-import>
+                      </li>
+                    </sc-for>
+                  </ul>
+                </div>
+              </sc-if>
+            </div>
+
+            </div>
+
+            <div style="position: sticky; bottom: 0; background: var(--color-bg); border-top: var(--rule-width) solid var(--color-ink); padding: var(--space-4) var(--screen-margin);">
+              <x-import component-from-global-scope="TrcedDS.Button" variant="primary" block="{{ true }}" on-click="{{ openCapture }}" hint-size="100%,44px">+ inscrire un renoncement</x-import>
+            </div>
+          </section>
+        </sc-if>
+        </main>
+        </sc-if>
+
+        <sc-if value="{{ asideVisible }}" hint-placeholder-val="{{ false }}">
+        <aside style="flex: 1 1 380px; min-width: 0; min-height: 0; overflow-y: auto; display: flex; flex-direction: column;">
+
+        <sc-if value="{{ isQuestionPage }}" hint-placeholder-val="{{ false }}">
+          <section data-screen-label="question à J+30" style="flex: 1; min-height: 0; overflow-y: auto; display: flex; flex-direction: column; justify-content: space-between; gap: var(--space-8); padding: var(--space-8) var(--screen-margin) var(--space-6);">
+            <div style="display: flex; flex-direction: column; gap: var(--space-6);">
+              <div style="display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-4);">
+                <p class="t-meta t-muted" style="margin: 0;">{{ queuePosition }}</p>
+                <p class="t-meta t-muted" style="margin: 0;">{{ askedOn }}</p>
+              </div>
+              <div style="display: flex; flex-direction: column; gap: var(--space-3); padding-bottom: var(--space-5); border-bottom: var(--rule-width) solid var(--color-ink);">
+                <p class="t-meta t-muted" style="margin: 0;">{{ renouncedOn }}</p>
+                <h1 class="t-display" style="margin: 0;">{{ currentName }}</h1>
+                <p class="t-data t-muted" style="margin: 0;">{{ currentMeta }}</p>
+              </div>
+              <p class="t-title" style="margin: 0;">Y pensez-vous encore ?</p>
+              <div>
+                <x-import component-from-global-scope="TrcedDS.ActionRow" name="oublié" value="je n'y pensais plus" on-click="{{ answerOublie }}" hint-size="100%,44px"></x-import>
+                <x-import component-from-global-scope="TrcedDS.ActionRow" name="vaguement" value="ça revient parfois" on-click="{{ answerVague }}" hint-size="100%,44px"></x-import>
+                <x-import component-from-global-scope="TrcedDS.ActionRow" name="toujours" value="je le veux encore" on-click="{{ answerToujours }}" hint-size="100%,44px"></x-import>
+              </div>
+            </div>
+            <div style="display: flex; align-items: center; justify-content: space-between; gap: var(--space-6);">
+              <sc-if value="{{ showLater }}" hint-placeholder-val="{{ false }}">
+                <x-import component-from-global-scope="TrcedDS.Button" variant="quiet" on-click="{{ goRegistre }}" hint-size="auto,44px">répondre plus tard</x-import>
+              </sc-if>
+              <p class="t-meta t-muted" style="margin: 0;">une seule réponse, pas de retour</p>
+            </div>
+          </section>
+        </sc-if>
+
+        <sc-if value="{{ isDetail }}" hint-placeholder-val="{{ false }}">
+          <section data-screen-label="envie en détail" style="flex: 1; min-height: 0; display: flex; flex-direction: column; gap: var(--space-6); padding: var(--space-5) var(--screen-margin) var(--space-8); overflow-y: auto;">
+            <x-import component-from-global-scope="TrcedDS.Button" variant="quiet" on-click="{{ goRegistre }}" hint-size="auto,44px">← le registre</x-import>
+            <div style="display: flex; flex-direction: column; gap: var(--space-2); padding-bottom: var(--space-4); border-bottom: var(--rule-width) solid var(--color-ink);">
+              <p class="t-meta t-muted" style="margin: 0;">{{ detailStatus }}</p>
+              <h1 class="t-title" style="margin: 0;">{{ detailName }}</h1>
+            </div>
+            <div>
+              <x-import component-from-global-scope="TrcedDS.StaticRow" name="prix relevé" value="{{ detailPrice }}" hint-size="100%,44px"></x-import>
+              <x-import component-from-global-scope="TrcedDS.StaticRow" name="où" value="{{ detailWhere }}" hint-size="100%,44px"></x-import>
+              <x-import component-from-global-scope="TrcedDS.StaticRow" name="inscrit le" value="{{ detailInscrit }}" hint-size="100%,44px"></x-import>
+              <x-import component-from-global-scope="TrcedDS.StaticRow" name="question posée le" value="{{ detailAsk }}" hint-size="100%,44px"></x-import>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: var(--space-2);">
+              <p class="section-label">pourquoi je le voulais</p>
+              <p class="t-body t-measure" style="margin: 0; color: var(--color-muted-strong);">{{ detailWhy }}</p>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: var(--space-2);">
+              <p class="section-label">chronologie</p>
+              <ul class="list">
+                <sc-for list="{{ detailTimeline }}" as="step" hint-placeholder-count="3">
+                  <li class="list__item">
+                    <x-import component-from-global-scope="TrcedDS.ListRow" row-key="{{ step.key }}" marker="{{ step.marker }}" title="{{ step.title }}" meta="{{ step.meta }}" hint-size="100%,52px"></x-import>
+                  </li>
+                </sc-for>
+              </ul>
+            </div>
+            <sc-if value="{{ detailDue }}" hint-placeholder-val="{{ false }}">
+              <div>
+                <x-import component-from-global-scope="TrcedDS.ActionRow" name="répondre maintenant" value="y pensez-vous encore ?" on-click="{{ openQuestionHere }}" hint-size="100%,44px"></x-import>
+              </div>
+            </sc-if>
+            <div>
+              <sc-if value="{{ askDelete }}" hint-placeholder-val="{{ false }}">
+                <x-import component-from-global-scope="TrcedDS.Confirm" title="{{ deleteTitle }}" body="La ligne et sa réponse disparaissent du registre. Le compte du mois est recalculé." hint-size="100%,120px">
+                  <x-import component-from-global-scope="TrcedDS.Button" variant="quiet" on-click="{{ cancelDelete }}" hint-size="auto,44px">annuler</x-import>
+                  <x-import component-from-global-scope="TrcedDS.Button" variant="destructive" strong="{{ true }}" on-click="{{ doDelete }}" hint-size="auto,44px">retirer</x-import>
+                </x-import>
+              </sc-if>
+              <sc-if value="{{ noAskDelete }}" hint-placeholder-val="{{ true }}">
+                <x-import component-from-global-scope="TrcedDS.Button" variant="destructive" on-click="{{ wantDelete }}" hint-size="auto,44px">retirer du registre</x-import>
+              </sc-if>
+            </div>
+          </section>
+        </sc-if>
+
+        <sc-if value="{{ isBilan }}" hint-placeholder-val="{{ false }}">
+          <section data-screen-label="bilan" style="flex: 1; min-height: 0; display: flex; flex-direction: column; gap: var(--space-6); padding: var(--space-5) var(--screen-margin) var(--space-8); overflow-y: auto;">
+            <x-import component-from-global-scope="TrcedDS.PeriodNav" title="{{ monthTitle }}" prev-label="{{ prevMonthLabel }}" next-label="{{ nextMonthLabel }}" prev-aria="mois précédent" next-aria="mois suivant" caption="{{ monthCaption }}" caption-hint="{{ monthCaptionHint }}" on-prev="{{ prevMonth }}" on-next="{{ nextMonth }}" on-today="{{ thisMonth }}" hint-size="100%,56px"></x-import>
+
+            <div style="display: flex; flex-direction: column; gap: var(--space-2);">
+              <p class="section-label section-label--strong">ce que vous avez répondu</p>
+              <ul class="list">
+                <li class="list__item">
+                  <x-import component-from-global-scope="TrcedDS.StatRow" label="oublié" value="{{ statOublieValue }}" empty="{{ statOublieEmpty }}" context="{{ statOublieContext }}" hint-size="100%,72px"></x-import>
+                </li>
+                <li class="list__item">
+                  <x-import component-from-global-scope="TrcedDS.StatRow" label="vaguement" value="{{ statVagueValue }}" empty="{{ statVagueEmpty }}" context="{{ statVagueContext }}" hint-size="100%,72px"></x-import>
+                </li>
+                <li class="list__item">
+                  <x-import component-from-global-scope="TrcedDS.StatRow" label="toujours" value="{{ statToujoursValue }}" empty="{{ statToujoursEmpty }}" context="{{ statToujoursContext }}" aside="{{ statToujoursAside }}" on-click="{{ openToujours }}" hint-size="100%,72px"></x-import>
+                </li>
+              </ul>
+              <p class="t-meta t-muted" style="margin: 0;">Trois réponses sur cinq oubliées : le mois n'a rien coûté à personne.</p>
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: var(--space-2);">
+              <p class="section-label">le registre ce mois-ci</p>
+              <x-import component-from-global-scope="TrcedDS.SummaryRow" label="renoncements inscrits" value="{{ sumInscrits }}" hint-size="100%,44px"></x-import>
+              <x-import component-from-global-scope="TrcedDS.SummaryRow" label="questions posées" value="{{ sumAsked }}" hint-size="100%,44px"></x-import>
+              <x-import component-from-global-scope="TrcedDS.SummaryRow" label="en attente de verdict" value="{{ sumPending }}" hint-size="100%,44px"></x-import>
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: var(--space-2);">
+              <p class="section-label">montants, pour mémoire</p>
+              <x-import component-from-global-scope="TrcedDS.SummaryRow" label="inscrit ce mois-ci" value="{{ sumMonthMoney }}" hint-size="100%,44px"></x-import>
+              <x-import component-from-global-scope="TrcedDS.SummaryRow" label="depuis le début" value="{{ sumAllMoney }}" hint-size="100%,44px"></x-import>
+              <x-import component-from-global-scope="TrcedDS.SummaryRow" label="dont encore désiré" value="{{ sumStillMoney }}" hint-size="100%,44px"></x-import>
+              <p class="t-meta t-muted t-measure" style="margin: var(--space-2) 0 0;">Ce total n'est pas une économie. C'est seulement la somme de ce que vous n'avez pas acheté, et elle ne dit rien de ce que vous vouliez vraiment.</p>
+            </div>
+          </section>
+        </sc-if>
+
+        <sc-if value="{{ isReglages }}" hint-placeholder-val="{{ false }}">
+          <section data-screen-label="réglages" style="flex: 1; min-height: 0; display: flex; flex-direction: column; gap: var(--space-6); padding: var(--space-6) var(--screen-margin) var(--space-8); overflow-y: auto;">
+            <h1 class="t-display" style="margin: 0;">réglages</h1>
+
+            <div style="display: flex; flex-direction: column; gap: var(--space-2);">
+              <p class="section-label">la question</p>
+              <div>
+                <x-import component-from-global-scope="TrcedDS.ToggleRow" name="délai avant la question" value="{{ delaiLabel }}" aria-label="{{ delaiAria }}" on-cycle="{{ cycleDelai }}" hint-size="100%,44px"></x-import>
+                <x-import component-from-global-scope="TrcedDS.ToggleRow" name="rappel" value="{{ rappelLabel }}" aria-label="{{ rappelAria }}" on-cycle="{{ cycleRappel }}" hint-size="100%,44px"></x-import>
+                <x-import component-from-global-scope="TrcedDS.ToggleRow" name="demander le prix" value="{{ prixLabel }}" aria-label="{{ prixAria }}" on-cycle="{{ cyclePrix }}" hint-size="100%,44px"></x-import>
+              </div>
+              <p class="t-meta t-muted" style="margin: 0;">Une ligne se change en la touchant : la valeur défile.</p>
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: var(--space-2);">
+              <p class="section-label">apparence</p>
+              <x-import component-from-global-scope="TrcedDS.ToggleRow" name="thème" value="{{ themeLabel }}" aria-label="{{ themeAria }}" on-cycle="{{ cycleTheme }}" hint-size="100%,44px"></x-import>
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: var(--space-2);">
+              <p class="section-label">les données</p>
+              <div>
+                <x-import component-from-global-scope="TrcedDS.ActionRow" name="exporter le registre" value="fichier JSON" on-click="{{ exportData }}" hint-size="100%,44px"></x-import>
+                <x-import component-from-global-scope="TrcedDS.ActionRow" name="revoir la présentation" value="trois écrans" on-click="{{ goOnboarding }}" hint-size="100%,44px"></x-import>
+                <sc-if value="{{ askErase }}" hint-placeholder-val="{{ false }}">
+                  <x-import component-from-global-scope="TrcedDS.Confirm" title="Effacer tout le registre ?" body="{{ eraseBody }}" hint-size="100%,120px">
+                    <x-import component-from-global-scope="TrcedDS.Button" variant="quiet" on-click="{{ cancelErase }}" hint-size="auto,44px">annuler</x-import>
+                    <x-import component-from-global-scope="TrcedDS.Button" variant="destructive" strong="{{ true }}" on-click="{{ doErase }}" hint-size="auto,44px">effacer</x-import>
+                  </x-import>
+                </sc-if>
+                <sc-if value="{{ noAskErase }}" hint-placeholder-val="{{ true }}">
+                  <x-import component-from-global-scope="TrcedDS.ActionRow" danger="{{ true }}" name="effacer le registre" value="{{ eraseValue }}" on-click="{{ wantErase }}" hint-size="100%,44px"></x-import>
+                </sc-if>
+                <x-import component-from-global-scope="TrcedDS.StaticRow" name="données" value="sur cet appareil" hint-size="100%,44px"></x-import>
+                <x-import component-from-global-scope="TrcedDS.StaticRow" name="version" value="1.0" hint-size="100%,44px"></x-import>
+              </div>
+            </div>
+          </section>
+        </sc-if>
+
+        <sc-if value="{{ showColophon }}" hint-placeholder-val="{{ false }}">
+        <div style="flex: 1; display: flex; flex-direction: column; justify-content: space-between; gap: var(--space-10); padding: var(--space-10) var(--screen-margin);">
+          <div style="display: flex; flex-direction: column; gap: var(--space-5); max-width: var(--measure-text);">
+            <p class="t-body" style="margin: 0;">Aucune question en attente.</p>
+            <p class="t-body" style="margin: 0; color: var(--color-muted-strong);">Une envie s'inscrit au moment où l'on y renonce. Trente jours plus tard, urge. la ramène ici et pose une question, une seule : y pensez-vous encore ?</p>
+          </div>
+          <div style="max-width: 380px; width: 100%;">
+            <p class="section-label">en un mot</p>
+            <x-import component-from-global-scope="TrcedDS.SummaryRow" label="prochaine question" value="{{ nextQuestionDate }}" hint-size="100%,44px"></x-import>
+            <x-import component-from-global-scope="TrcedDS.SummaryRow" label="inscrits" value="{{ sumTotalCount }}" hint-size="100%,44px"></x-import>
+            <x-import component-from-global-scope="TrcedDS.SummaryRow" label="jugés" value="{{ sumJudged }}" hint-size="100%,44px"></x-import>
+            <x-import component-from-global-scope="TrcedDS.SummaryRow" label="en attente" value="{{ sumWaiting }}" hint-size="100%,44px"></x-import>
+          </div>
+        </div>
+        </sc-if>
+
+        </aside>
+        </sc-if>
+
+      <sc-if value="{{ sheetCaptureSimple }}" hint-placeholder-val="{{ false }}">
+        <x-import component-from-global-scope="TrcedDS.Sheet" label="inscrire un renoncement" on-close="{{ closeSheet }}" hint-size="100%,100%">
+          <div class="sheet__head">
+            <span class="t-brand">un renoncement</span>
+            <x-import component-from-global-scope="TrcedDS.Button" variant="quiet" on-click="{{ closeSheet }}" hint-size="auto,44px">fermer</x-import>
+          </div>
+          <x-import component-from-global-scope="TrcedDS.TextField" required="{{ true }}" label="Ce que je n'achète pas" value="{{ draftName }}" on-value-change="{{ setName }}" error="{{ draftError }}" placeholder="objectif 35 mm" hint-size="100%,72px"></x-import>
+          <div style="display: flex; gap: var(--space-4);">
+            <sc-if value="{{ prixDemande }}" hint-placeholder-val="{{ true }}">
+              <div style="flex: 0 0 108px; min-width: 0;">
+                <x-import component-from-global-scope="TrcedDS.TextField" label="Prix" value="{{ draftPrice }}" on-value-change="{{ setPrice }}" placeholder="429" input-mode="numeric" hint-size="100%,72px"></x-import>
+              </div>
+            </sc-if>
+            <div style="flex: 1 1 auto; min-width: 0;">
+              <x-import component-from-global-scope="TrcedDS.TextField" label="Où" value="{{ draftWhere }}" on-value-change="{{ setWhere }}" placeholder="digit-photo" hint-size="100%,72px"></x-import>
+            </div>
+          </div>
+          <x-import component-from-global-scope="TrcedDS.TextAreaField" label="Pourquoi je le voulais" value="{{ draftWhy }}" on-value-change="{{ setWhy }}" placeholder="La raison, en une phrase." rows="{{ 2 }}" hint="{{ captureHint }}" hint-size="100%,100px"></x-import>
+          <div class="sheet__actions" style="position: sticky; bottom: 0; background: var(--color-bg);">
+            <x-import component-from-global-scope="TrcedDS.Button" variant="quiet" on-click="{{ closeSheet }}" hint-size="auto,44px">annuler</x-import>
+            <x-import component-from-global-scope="TrcedDS.Button" variant="primary" on-click="{{ saveEntry }}" hint-size="auto,44px">inscrire</x-import>
+          </div>
+        </x-import>
+      </sc-if>
+
+      <sc-if value="{{ sheetCaptureSeq }}" hint-placeholder-val="{{ false }}">
+        <x-import component-from-global-scope="TrcedDS.Sheet" full="{{ true }}" label="inscrire un renoncement" on-close="{{ closeSheet }}" hint-size="100%,100%">
+          <div style="height: 100%; display: flex; flex-direction: column; justify-content: space-between; gap: var(--space-8); padding: var(--space-6) var(--screen-margin); max-width: var(--panel-measure);">
+            <div style="display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-4);">
+              <span class="t-meta t-muted">{{ stepCount }}</span>
+              <x-import component-from-global-scope="TrcedDS.Button" variant="quiet" on-click="{{ closeSheet }}" hint-size="auto,44px">fermer</x-import>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: var(--space-6);">
+              <sc-if value="{{ step0 }}" hint-placeholder-val="{{ true }}">
+                <div style="display: flex; flex-direction: column; gap: var(--space-6);">
+                  <h2 class="t-display" style="margin: 0;">Qu'est-ce que vous n'achetez pas ?</h2>
+                  <x-import component-from-global-scope="TrcedDS.TextField" required="{{ true }}" label="L'objet" value="{{ draftName }}" on-value-change="{{ setName }}" error="{{ draftError }}" placeholder="objectif 35 mm" hint="Le nom suffit. Le reste vient après." hint-size="100%,80px"></x-import>
+                </div>
+              </sc-if>
+              <sc-if value="{{ step1 }}" hint-placeholder-val="{{ false }}">
+                <div style="display: flex; flex-direction: column; gap: var(--space-6);">
+                  <h2 class="t-display" style="margin: 0;">Combien, et où ?</h2>
+                  <div style="display: flex; flex-direction: column; gap: var(--space-4);">
+                    <sc-if value="{{ prixDemande }}" hint-placeholder-val="{{ true }}">
+                      <x-import component-from-global-scope="TrcedDS.TextField" label="Prix" value="{{ draftPrice }}" on-value-change="{{ setPrice }}" placeholder="429" input-mode="numeric" hint-size="100%,72px"></x-import>
+                    </sc-if>
+                    <x-import component-from-global-scope="TrcedDS.TextField" label="Où" value="{{ draftWhere }}" on-value-change="{{ setWhere }}" placeholder="digit-photo" hint-size="100%,72px"></x-import>
+                  </div>
+                </div>
+              </sc-if>
+              <sc-if value="{{ step2 }}" hint-placeholder-val="{{ false }}">
+                <div style="display: flex; flex-direction: column; gap: var(--space-6);">
+                  <h2 class="t-display" style="margin: 0;">Pourquoi le vouliez-vous ?</h2>
+                  <x-import component-from-global-scope="TrcedDS.TextAreaField" label="La raison" value="{{ draftWhy }}" on-value-change="{{ setWhy }}" placeholder="Une phrase, celle que vous vous êtes dite." rows="{{ 3 }}" hint="C'est cette phrase que vous relirez dans trente jours." hint-size="100%,120px"></x-import>
+                </div>
+              </sc-if>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: var(--space-4);">
+              <p class="t-meta t-muted" style="margin: 0;">{{ captureHint }}</p>
+              <div style="display: flex; align-items: center; justify-content: space-between; gap: var(--space-6); padding-top: var(--space-4); border-top: var(--rule-width) solid var(--color-rule);">
+                <x-import component-from-global-scope="TrcedDS.Button" variant="quiet" on-click="{{ prevStep }}" hint-size="auto,44px">{{ prevStepLabel }}</x-import>
+                <x-import component-from-global-scope="TrcedDS.Button" variant="primary" on-click="{{ nextStep }}" hint-size="auto,44px">{{ nextStepLabel }}</x-import>
+              </div>
+            </div>
+          </div>
+        </x-import>
+      </sc-if>
+
+      <sc-if value="{{ sheetQuestion }}" hint-placeholder-val="{{ false }}">
+        <x-import component-from-global-scope="TrcedDS.Sheet" label="y pensez-vous encore ?" on-close="{{ closeSheet }}" hint-size="100%,100%">
+          <div class="sheet__head">
+            <span class="t-brand">{{ queuePosition }}</span>
+            <x-import component-from-global-scope="TrcedDS.Button" variant="quiet" on-click="{{ closeSheet }}" hint-size="auto,44px">plus tard</x-import>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: var(--space-2); padding-bottom: var(--space-3); border-bottom: var(--rule-width) solid var(--color-rule);">
+            <p class="t-meta t-muted" style="margin: 0;">{{ renouncedOn }}</p>
+            <p class="t-title" style="margin: 0;">{{ currentName }}</p>
+            <p class="t-meta t-muted" style="margin: 0;">{{ currentMeta }}</p>
+          </div>
+          <p class="t-body t-measure" style="margin: 0; color: var(--color-muted-strong);">« {{ currentWhy }} »</p>
+          <p class="t-title" style="margin: 0;">Y pensez-vous encore ?</p>
+          <div>
+            <x-import component-from-global-scope="TrcedDS.ActionRow" name="oublié" value="je n'y pensais plus" on-click="{{ answerOublie }}" hint-size="100%,44px"></x-import>
+            <x-import component-from-global-scope="TrcedDS.ActionRow" name="vaguement" value="ça revient parfois" on-click="{{ answerVague }}" hint-size="100%,44px"></x-import>
+            <x-import component-from-global-scope="TrcedDS.ActionRow" name="toujours" value="je le veux encore" on-click="{{ answerToujours }}" hint-size="100%,44px"></x-import>
+          </div>
+        </x-import>
+      </sc-if>
+      </div>
+    </div>
+  </sc-if>
+
+  <footer style="display: flex; flex-wrap: nowrap; overflow-x: auto; align-items: center; gap: var(--space-6); padding: var(--space-2) var(--screen-margin); border-top: var(--rule-width) solid var(--color-rule);">
+    <span class="section-label" style="margin: 0; flex: 0 0 auto;">variantes</span>
+    <span style="display: flex; align-items: center; gap: var(--space-3); flex: 0 0 auto;">
+      <span class="t-meta t-muted">renoncement</span>
+      <x-import component-from-global-scope="TrcedDS.Button" variant="{{ hCaptureA }}" on-click="{{ setCaptureA }}" hint-size="auto,44px">feuille</x-import>
+      <x-import component-from-global-scope="TrcedDS.Button" variant="{{ hCaptureB }}" on-click="{{ setCaptureB }}" hint-size="auto,44px">séquence</x-import>
+    </span>
+    <span style="display: flex; align-items: center; gap: var(--space-3); flex: 0 0 auto;">
+      <span class="t-meta t-muted">question</span>
+      <x-import component-from-global-scope="TrcedDS.Button" variant="{{ hQuestionA }}" on-click="{{ setQuestionA }}" hint-size="auto,44px">pleine page</x-import>
+      <x-import component-from-global-scope="TrcedDS.Button" variant="{{ hQuestionB }}" on-click="{{ setQuestionB }}" hint-size="auto,44px">feuille</x-import>
+    </span>
+    <span style="display: flex; align-items: center; gap: var(--space-3); flex: 0 0 auto;">
+      <span class="t-meta t-muted">registre</span>
+      <x-import component-from-global-scope="TrcedDS.Button" variant="{{ hRegistreA }}" on-click="{{ setRegistreA }}" hint-size="auto,44px">mêlé</x-import>
+      <x-import component-from-global-scope="TrcedDS.Button" variant="{{ hRegistreB }}" on-click="{{ setRegistreB }}" hint-size="auto,44px">verdict en marge</x-import>
+    </span>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;varianteRenoncement&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;feuille&quot;,&quot;séquence&quot;],&quot;default&quot;:&quot;feuille&quot;,&quot;tsType&quot;:&quot;'feuille' | 'séquence'&quot;,&quot;section&quot;:&quot;variantes&quot;},&quot;varianteQuestion&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;pleine page&quot;,&quot;feuille&quot;],&quot;default&quot;:&quot;pleine page&quot;,&quot;tsType&quot;:&quot;'pleine page' | 'feuille'&quot;,&quot;section&quot;:&quot;variantes&quot;},&quot;varianteRegistre&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;mêlé&quot;,&quot;verdict en marge&quot;],&quot;default&quot;:&quot;mêlé&quot;,&quot;tsType&quot;:&quot;'mêlé' | 'verdict en marge'&quot;,&quot;section&quot;:&quot;variantes&quot;},&quot;prixVisibles&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;réglages&quot;},&quot;delaiJours&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:30,&quot;min&quot;:7,&quot;max&quot;:90,&quot;step&quot;:1,&quot;unit&quot;:&quot;jours&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;réglages&quot;}}">
+class Component extends DCLogic {
+  shellRef = React.createRef();
+
+  state = {
+    entries: this.seed(),
+    screen: 'registre',
+    sheet: null,
+    step: 0,
+    draft: { name: '', price: '', where: '', why: '' },
+    draftError: '',
+    selectedId: null,
+    queue: [],
+    qi: 0,
+    answered: 0,
+    notice: null,
+    askDelete: false,
+    askErase: false,
+    onboardStep: 0,
+    month: 7,
+    theme: 'système',
+    rappel: 'le matin, 9 h',
+    delai: null,
+    prix: null,
+    vCapture: null,
+    vQuestion: null,
+    vRegistre: null,
+    wide: false
+  };
+
+  seed() {
+    const raw = [
+      ['a1', 'casque à réduction de bruit', 299, 'amazon', 'Le bruit du plateau, tous les matins.', '2026-07-02', 'toujours'],
+      ['a2', 'vélo gravel', 1190, 'magasin, rue Oberkampf', 'Sortir de Paris le dimanche sans voiture.', '2026-07-04', 'vaguement'],
+      ['a3', 'tapis de yoga', 68, 'en ligne', "Le cours du mardi, que je n'ai pas repris.", '2026-07-06', 'oublié'],
+      ['a4', 'coffret de thé en vrac', 42, 'comptoir, rue Rambuteau', "Pour remplacer le café de l'après-midi.", '2026-07-09', 'oublié'],
+      ['a5', "lampe d'architecte, seconde main", 175, 'leboncoin', 'La lumière du bureau est mauvaise le soir.', '2026-07-12', 'oublié'],
+      ['a6', 'cafetière filtre', 249, 'site du fabricant', 'Trois cafés par jour, autant les faire bien.', '2026-07-14', null],
+      ['a7', 'sac de voyage 40 L', 145, 'bellroy.com', 'Deux semaines au Portugal en septembre.', '2026-07-15', null],
+      ['a8', 'bottines en cuir', 165, 'boutique, rue de Turenne', 'Les miennes ont deux hivers.', '2026-07-19', null],
+      ['a9', "chaise de bureau d'occasion", 240, 'leboncoin', 'Le dos, en fin de journée.', '2026-07-21', null],
+      ['a10', 'enceinte portable', 199, 'fnac', "Pour le balcon, l'été.", '2026-07-28', null],
+      ['a11', 'abonnement annuel, appli de méditation', 71, 'en ligne', 'Dormir mieux sans y penser.', '2026-08-02', null],
+      ['a12', 'machine à pâtes', 89, 'brocante de Vanves', "Les dimanches d'hiver.", '2026-08-07', null],
+      ['a13', 'objectif 35 mm', 429, 'digit-photo', 'Photographier les gens, pas les paysages.', '2026-08-09', null],
+      ['a14', 'veste en laine, seconde main', 78, 'vinted', 'Elle était exactement à ma taille.', '2026-08-12', null],
+      ['b1', 'console portable', 349, 'micromania', 'Le trajet du matin, quarante minutes.', '2026-06-02', 'vaguement'],
+      ['b2', 'grille-pain', 119, 'en ligne', 'Le nôtre brûle un côté.', '2026-06-11', 'oublié'],
+      ['b3', 'roman en grand format', 24, 'librairie du quartier', 'Tout le monde en parlait cette semaine-là.', '2026-06-19', 'oublié'],
+      ['b4', 'sacoche de vélo', 95, 'seconde main', 'Pour ne plus porter le sac à dos.', '2026-06-24', 'oublié'],
+      ['b5', 'pull en mérinos', 130, 'en ligne', 'Le gris, précisément celui-là.', '2026-06-30', 'oublié'],
+      ['c1', "coffret d'aquarelles", 62, 'papeterie, rue de Bretagne', 'Recommencer à dessiner.', '2026-05-21', 'oublié']
+    ];
+    return raw.map(([id, name, price, where, why, inscrit, verdict]) => ({ id, name, price, where, why, inscrit, verdict }));
+  }
+
+  componentDidMount() {
+    this.measure();
+    if (typeof ResizeObserver !== 'undefined' && this.shellRef.current) {
+      this.ro = new ResizeObserver(() => this.measure());
+      this.ro.observe(this.shellRef.current);
+    }
+    this.applyTheme(this.state.theme);
+  }
+
+  componentWillUnmount() { if (this.ro) this.ro.disconnect(); }
+
+  measure() {
+    const el = this.shellRef.current;
+    if (!el) return;
+    const wide = el.clientWidth >= 900;
+    if (wide !== this.state.wide) this.setState({ wide });
+  }
+
+  applyTheme(theme) {
+    const root = document.documentElement;
+    if (theme === 'clair') root.dataset.theme = 'light';
+    else if (theme === 'sombre') root.dataset.theme = 'dark';
+    else delete root.dataset.theme;
+  }
+
+  today() { return new Date(2026, 7, 14); }
+  delai() { return this.state.delai ?? this.props.delaiJours ?? 30; }
+  prixDemande() { return this.state.prix ?? (this.props.prixVisibles !== false); }
+  vCapture() { return this.state.vCapture ?? this.props.varianteRenoncement ?? 'feuille'; }
+  vQuestion() { return this.state.vQuestion ?? this.props.varianteQuestion ?? 'pleine page'; }
+  vRegistre() { return this.state.vRegistre ?? this.props.varianteRegistre ?? 'mêlé'; }
+
+  parse(iso) { const p = iso.split('-').map(Number); return new Date(p[0], p[1] - 1, p[2]); }
+  addDays(date, n) { const d = new Date(date); d.setDate(d.getDate() + n); return d; }
+  days(a, b) { return Math.round((a - b) / 86400000); }
+  short(d) { return String(d.getDate()).padStart(2, '0') + '/' + String(d.getMonth() + 1).padStart(2, '0'); }
+  long(d) { return new Intl.DateTimeFormat('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' }).format(d); }
+  day(d) { return new Intl.DateTimeFormat('fr-FR', { day: 'numeric', month: 'long' }).format(d); }
+  monthName(i) { return new Intl.DateTimeFormat('fr-FR', { month: 'long' }).format(new Date(2026, i, 1)); }
+  euro(n) { return new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(n); }
+  plural(n, one, many) { return n + ' ' + (n > 1 ? many : one); }
+
+  enriched() {
+    const today = this.today();
+    return this.state.entries.map((e) => {
+      const inscritDate = this.parse(e.inscrit);
+      const askDate = this.addDays(inscritDate, this.delai());
+      return { ...e, inscritDate, askDate, due: !e.verdict && askDate <= today, pending: !e.verdict };
+    }).sort((a, b) => b.inscritDate - a.inscritDate);
+  }
+
+  dueList() { return this.enriched().filter((e) => e.due).sort((a, b) => a.askDate - b.askDate); }
+
+  metaFor(e) {
+    const bits = [];
+    if (this.prixDemande()) bits.push(this.euro(e.price));
+    if (e.where) bits.push(e.where);
+    return bits.join(' · ');
+  }
+
+  verdictWord(e) {
+    if (e.verdict === 'oublié') return 'oublié';
+    if (e.verdict === 'vaguement') return 'vaguement';
+    if (e.verdict === 'toujours') return 'toujours';
+    return e.due ? 'à répondre' : 'question le ' + this.short(e.askDate);
+  }
+
+  rowsMele() {
+    const list = this.enriched();
+    const out = [];
+    list.forEach((e, i) => {
+      const prev = list[i - 1];
+      if (prev) {
+        const gap = this.days(prev.inscritDate, e.inscritDate) - 1;
+        if (gap >= 4) out.push({ gap: true, entry: false, id: 'g' + e.id, label: gap + ' jours sans rien inscrire' });
+      }
+      out.push({
+        gap: false,
+        entry: true,
+        id: e.id,
+        key: this.short(e.inscritDate),
+        name: e.name,
+        meta: this.metaFor(e),
+        extra: React.createElement('span', { className: 't-meta t-muted' }, this.verdictWord(e)),
+        marker: { dot: true },
+        selected: this.state.selectedId === e.id,
+        a11y: { ariaLabel: e.name + ', inscrit le ' + this.long(e.inscritDate) + ', ' + this.verdictWord(e) },
+        open: () => this.openDetail(e.id)
+      });
+    });
+    out.forEach((r, i) => {
+      if (!r.entry) return;
+      r.marker = { dot: true, lineUp: !!(out[i - 1] && out[i - 1].entry), lineDown: !!(out[i + 1] && out[i + 1].entry) };
+    });
+    return out;
+  }
+
+  rowsVerdict() {
+    return this.enriched().map((e) => ({
+      id: e.id,
+      key: e.verdict ? e.verdict : (e.due ? 'à répondre' : 'en attente'),
+      name: e.name,
+      meta: this.day(e.inscritDate) + (this.prixDemande() ? ' · ' + this.euro(e.price) : ''),
+      marker: { dot: !!e.verdict },
+      selected: this.state.selectedId === e.id,
+      a11y: { ariaLabel: this.verdictWord(e) + ' — ' + e.name + ', inscrit le ' + this.long(e.inscritDate) },
+      open: () => this.openDetail(e.id)
+    }));
+  }
+
+  openDetail(id) { this.setState({ screen: 'detail', selectedId: id, askDelete: false, notice: null }); }
+
+  openQuestion = () => {
+    const queue = this.dueList().map((e) => e.id);
+    if (!queue.length) return;
+    if (this.vQuestion() === 'feuille') this.setState({ sheet: 'question', queue, qi: 0, answered: 0, notice: null });
+    else this.setState({ screen: 'question', queue, qi: 0, answered: 0, notice: null });
+  };
+
+  current() {
+    const id = this.state.queue[this.state.qi];
+    if (id) return this.enriched().find((e) => e.id === id) || null;
+    // Sur desktop, le panneau de droite pose la question la plus ancienne échue,
+    // sans qu'on ait à la demander : c'est son travail.
+    if (this.state.wide && this.state.screen === 'registre') return this.dueList()[0] || null;
+    return null;
+  }
+
+  answer(verdict) {
+    const cur = this.current();
+    if (!cur) return;
+    const entries = this.state.entries.map((e) => (e.id === cur.id ? { ...e, verdict } : e));
+    if (!this.state.queue.length) { this.setState({ entries }); return; }
+    const answered = this.state.answered + 1;
+    const last = this.state.qi + 1 >= this.state.queue.length;
+    if (last) {
+      this.setState({
+        entries, answered: 0, queue: [], qi: 0, sheet: null, screen: 'registre',
+        notice: {
+          title: this.plural(answered, 'réponse enregistrée.', 'réponses enregistrées.'),
+          body: "Le registre ne change pas d'ordre : seule la ligne du verdict est complétée."
+        }
+      });
+    } else {
+      this.setState({ entries, answered, qi: this.state.qi + 1 });
+    }
+  }
+
+  monthStats() {
+    const m = this.state.month;
+    const all = this.enriched();
+    const answeredThis = all.filter((e) => e.verdict && e.askDate.getMonth() === m && e.askDate.getFullYear() === 2026);
+    const count = (v) => answeredThis.filter((e) => e.verdict === v).length;
+    const inscrits = all.filter((e) => e.inscritDate.getMonth() === m && e.inscritDate.getFullYear() === 2026);
+    const toujours = answeredThis.filter((e) => e.verdict === 'toujours');
+    const vague = answeredThis.filter((e) => e.verdict === 'vaguement');
+    return {
+      answered: answeredThis.length,
+      oublie: count('oublié'),
+      vaguement: count('vaguement'),
+      toujours: count('toujours'),
+      inscrits: inscrits.length,
+      pending: all.filter((e) => e.pending).length,
+      monthMoney: inscrits.reduce((s, e) => s + e.price, 0),
+      allMoney: all.reduce((s, e) => s + e.price, 0),
+      stillMoney: all.filter((e) => e.verdict === 'toujours').reduce((s, e) => s + e.price, 0),
+      firstToujours: toujours[0] || null,
+      firstVague: vague[0] || null
+    };
+  }
+
+  renderVals() {
+    const st = this.state;
+    const all = this.enriched();
+    const due = this.dueList();
+    const cur = this.current();
+    const sel = st.selectedId ? all.find((e) => e.id === st.selectedId) : null;
+    const s = this.monthStats();
+    const vq = this.vQuestion();
+    const vc = this.vCapture();
+    const vr = this.vRegistre();
+    const nav = (name) => (st.screen === name ? 'text' : 'quiet');
+    const pick = (a, b) => (a === b ? 'text' : 'quiet');
+    const onboardLabels = ['1 sur 3', '2 sur 3', '3 sur 3'];
+    const nextAsk = this.addDays(this.today(), this.delai());
+
+    const timeline = sel ? [
+      { key: this.short(sel.inscritDate), title: 'inscrit — renoncement', meta: this.long(sel.inscritDate), marker: { dot: true, lineDown: true } },
+      { key: this.short(sel.askDate), title: sel.askDate <= this.today() ? 'question posée' : 'question à venir', meta: this.long(sel.askDate), marker: { dot: sel.askDate <= this.today(), lineUp: true, lineDown: !!sel.verdict } },
+      sel.verdict
+        ? { key: this.short(sel.askDate), title: 'réponse — ' + sel.verdict, meta: 'trente jours après le renoncement', marker: { dot: true, lineUp: true } }
+        : { key: '—', title: 'sans réponse', meta: sel.due ? 'la question attend' : 'la question viendra le ' + this.long(sel.askDate), marker: { lineUp: true } }
+    ] : [];
+
+    return {
+      shellRef: this.shellRef,
+      wide: st.wide,
+      isOnboarding: st.screen === 'onboarding',
+      inApp: st.screen !== 'onboarding',
+      isRegistre: st.screen === 'registre',
+      mainVisible: st.wide || st.screen === 'registre',
+      asideVisible: st.wide || st.screen !== 'registre',
+      showColophon: st.wide && st.screen === 'registre' && !cur,
+      isQuestionPage: !!cur && (st.screen === 'question' || (st.wide && st.screen === 'registre')),
+      showLater: st.queue.length > 0,
+      isDetail: st.screen === 'detail' && !!sel,
+      isBilan: st.screen === 'bilan',
+      isReglages: st.screen === 'réglages',
+      navRegistre: nav('registre'),
+      navBilan: nav('bilan'),
+      navReglages: nav('réglages'),
+      goRegistre: () => this.setState({ screen: 'registre', sheet: null, askDelete: false }),
+      goBilan: () => this.setState({ screen: 'bilan', sheet: null, notice: null }),
+      goReglages: () => this.setState({ screen: 'réglages', sheet: null, notice: null }),
+      goOnboarding: () => this.setState({ screen: 'onboarding', onboardStep: 0, sheet: null }),
+
+      onboard0: st.onboardStep === 0,
+      onboard1: st.onboardStep === 1,
+      onboard2: st.onboardStep === 2,
+      onboardCount: onboardLabels[st.onboardStep],
+      onboardCta: st.onboardStep === 2 ? 'ouvrir le registre' : 'suivant',
+      nextOnboard: () => (st.onboardStep === 2 ? this.setState({ screen: 'registre' }) : this.setState({ onboardStep: st.onboardStep + 1 })),
+      skipOnboard: () => this.setState({ screen: 'registre' }),
+
+      registreCount: all.length + ' inscrits · ' + all.filter((e) => e.pending).length + ' en attente de verdict',
+      isEmpty: all.length === 0,
+      registreMele: vr === 'mêlé' && all.length > 0,
+      registreVerdict: vr !== 'mêlé' && all.length > 0,
+      rows: this.rowsMele(),
+      verdictRows: this.rowsVerdict(),
+      openQuestion: this.openQuestion,
+      hasDue: due.length > 0,
+      dueLabel: this.plural(due.length, 'envie échue', 'envies échues'),
+      hasNotice: !!st.notice,
+      noticeTitle: st.notice ? st.notice.title : '',
+      noticeBody: st.notice ? st.notice.body : '',
+      clearNotice: () => this.setState({ notice: null }),
+
+      openCapture: () => this.setState({ sheet: 'capture', step: 0, draftError: '', draft: { name: '', price: '', where: '', why: '' } }),
+      closeSheet: () => this.setState({ sheet: null, draftError: '' }),
+      sheetCaptureSimple: st.sheet === 'capture' && vc === 'feuille',
+      sheetCaptureSeq: st.sheet === 'capture' && vc !== 'feuille',
+      sheetQuestion: st.sheet === 'question' && !!cur,
+      prixDemande: this.prixDemande(),
+      draftName: st.draft.name,
+      draftPrice: st.draft.price,
+      draftWhere: st.draft.where,
+      draftWhy: st.draft.why,
+      draftError: st.draftError,
+      setName: (v) => this.setState({ draft: { ...st.draft, name: v } }),
+      setPrice: (v) => this.setState({ draft: { ...st.draft, price: v.replace(/[^0-9]/g, '') } }),
+      setWhere: (v) => this.setState({ draft: { ...st.draft, where: v } }),
+      setWhy: (v) => this.setState({ draft: { ...st.draft, why: v } }),
+      captureHint: 'La question reviendra le ' + this.long(nextAsk) + '.',
+      stepCount: (st.step + 1) + ' sur 3',
+      step0: st.step === 0,
+      step1: st.step === 1,
+      step2: st.step === 2,
+      prevStepLabel: st.step === 0 ? 'annuler' : 'retour',
+      nextStepLabel: st.step === 2 ? 'inscrire' : 'suivant',
+      prevStep: () => (st.step === 0 ? this.setState({ sheet: null }) : this.setState({ step: st.step - 1 })),
+      nextStep: () => {
+        if (st.step === 0 && !st.draft.name.trim()) { this.setState({ draftError: "Nommez l'objet : c'est la seule chose obligatoire." }); return; }
+        if (st.step === 2) this.saveEntry();
+        else this.setState({ step: st.step + 1, draftError: '' });
+      },
+      saveEntry: () => this.saveEntry(),
+
+      queuePosition: cur ? (st.queue.length ? (st.qi + 1) + ' sur ' + st.queue.length : this.plural(due.length, 'question en attente', 'questions en attente')) : '',
+      nextQuestionDate: (() => { const soon = all.filter((e) => e.pending && !e.due).sort((a, b) => a.askDate - b.askDate)[0]; return soon ? this.day(soon.askDate) : '—'; })(),
+      askedOn: cur ? 'question du ' + this.long(cur.askDate) : '',
+      renouncedOn: cur ? 'renoncé le ' + this.long(cur.inscritDate) : '',
+      currentName: cur ? cur.name : '',
+      currentMeta: cur ? this.metaFor(cur) : '',
+      currentWhy: cur ? cur.why : '',
+      answerOublie: () => this.answer('oublié'),
+      answerVague: () => this.answer('vaguement'),
+      answerToujours: () => this.answer('toujours'),
+
+      detailName: sel ? sel.name : '',
+      detailStatus: sel ? (sel.verdict ? 'jugé · ' + sel.verdict : (sel.due ? 'question échue' : 'en attente de verdict')) : '',
+      detailPrice: sel ? (this.prixDemande() ? this.euro(sel.price) : 'non demandé') : '',
+      detailWhere: sel ? sel.where : '',
+      detailInscrit: sel ? this.long(sel.inscritDate) : '',
+      detailAsk: sel ? this.long(sel.askDate) : '',
+      detailWhy: sel ? sel.why : '',
+      detailTimeline: timeline,
+      detailDue: !!(sel && sel.due),
+      openQuestionHere: () => {
+        if (!sel) return;
+        const queue = [sel.id];
+        if (vq === 'feuille') this.setState({ sheet: 'question', queue, qi: 0, answered: 0 });
+        else this.setState({ screen: 'question', queue, qi: 0, answered: 0 });
+      },
+      askDelete: st.askDelete,
+      noAskDelete: !st.askDelete,
+      deleteTitle: sel ? 'Retirer « ' + sel.name + ' » ?' : '',
+      wantDelete: () => this.setState({ askDelete: true }),
+      cancelDelete: () => this.setState({ askDelete: false }),
+      doDelete: () => this.setState({
+        entries: st.entries.filter((e) => e.id !== st.selectedId),
+        screen: 'registre', selectedId: null, askDelete: false,
+        notice: { title: 'Ligne retirée.', body: 'Le registre ne garde aucune trace de ce qui en sort.' }
+      }),
+
+      monthTitle: this.monthName(st.month) + ' 2026',
+      prevMonthLabel: this.monthName((st.month + 11) % 12),
+      nextMonthLabel: this.monthName((st.month + 1) % 12),
+      monthCaption: st.month === 7 ? 'ce mois-ci' : 'revenir à août',
+      monthCaptionHint: 'revenir à août 2026',
+      prevMonth: () => this.setState({ month: (st.month + 11) % 12 }),
+      nextMonth: () => this.setState({ month: (st.month + 1) % 12 }),
+      thisMonth: () => this.setState({ month: 7 }),
+      statOublieValue: s.answered ? String(s.oublie) : '—',
+      statOublieEmpty: !s.answered,
+      statOublieContext: s.answered ? 'sur ' + this.plural(s.answered, 'réponse', 'réponses') + ' ce mois-ci' : 'aucune question posée ce mois-ci',
+      statVagueValue: s.answered ? String(s.vaguement) : '—',
+      statVagueEmpty: !s.answered,
+      statVagueContext: s.firstVague ? s.firstVague.name + ' · inscrit le ' + this.day(s.firstVague.inscritDate) : 'rien qui revient',
+      statToujoursValue: s.answered ? String(s.toujours) : '—',
+      statToujoursEmpty: !s.answered,
+      statToujoursContext: s.firstToujours ? s.firstToujours.name + ' · inscrit le ' + this.day(s.firstToujours.inscritDate) : 'rien qui tient trente jours',
+      statToujoursAside: s.firstToujours && this.prixDemande() ? this.euro(s.firstToujours.price) : '',
+      openToujours: () => { if (s.firstToujours) this.openDetail(s.firstToujours.id); },
+      sumInscrits: String(s.inscrits),
+      sumAsked: String(s.answered),
+      sumPending: String(s.pending),
+      sumMonthMoney: this.euro(s.monthMoney),
+      sumAllMoney: this.euro(s.allMoney),
+      sumStillMoney: this.euro(s.stillMoney),
+      sumTotalCount: String(all.length),
+      sumJudged: String(all.filter((e) => e.verdict).length),
+      sumWaiting: String(all.filter((e) => e.pending).length),
+
+      delaiLabel: this.plural(this.delai(), 'jour', 'jours'),
+      delaiAria: 'délai avant la question : ' + this.delai() + ' jours, changer',
+      cycleDelai: () => { const cycle = [15, 30, 60]; const i = cycle.indexOf(this.delai()); this.setState({ delai: cycle[(i + 1) % cycle.length] }); },
+      rappelLabel: st.rappel,
+      rappelAria: 'rappel : ' + st.rappel + ', changer',
+      cycleRappel: () => { const cycle = ['le matin, 9 h', 'le soir, 20 h', 'aucun']; const i = cycle.indexOf(st.rappel); this.setState({ rappel: cycle[(i + 1) % cycle.length] }); },
+      prixLabel: this.prixDemande() ? 'oui' : 'jamais',
+      prixAria: 'demander le prix : ' + (this.prixDemande() ? 'oui' : 'jamais') + ', changer',
+      cyclePrix: () => this.setState({ prix: !this.prixDemande() }),
+      themeLabel: st.theme,
+      themeAria: 'thème : ' + st.theme + ', changer',
+      cycleTheme: () => { const cycle = ['système', 'clair', 'sombre']; const i = cycle.indexOf(st.theme); const next = cycle[(i + 1) % cycle.length]; this.applyTheme(next); this.setState({ theme: next }); },
+      exportData: () => this.setState({ screen: 'registre', notice: { title: 'Registre exporté.', body: this.plural(all.length, 'ligne', 'lignes') + ' écrites dans un fichier JSON, sur cet appareil.' } }),
+      askErase: st.askErase,
+      noAskErase: !st.askErase,
+      eraseValue: this.plural(all.length, 'ligne', 'lignes'),
+      eraseBody: this.plural(all.length, 'ligne', 'lignes') + ' et leurs réponses seront effacées de cet appareil. Rien ne peut les rappeler.',
+      wantErase: () => this.setState({ askErase: true }),
+      cancelErase: () => this.setState({ askErase: false }),
+      doErase: () => this.setState({ entries: [], askErase: false, screen: 'registre', selectedId: null, notice: null }),
+
+      hCaptureA: pick(vc, 'feuille'),
+      hCaptureB: pick(vc, 'séquence'),
+      hQuestionA: pick(vq, 'pleine page'),
+      hQuestionB: pick(vq, 'feuille'),
+      hRegistreA: pick(vr, 'mêlé'),
+      hRegistreB: pick(vr, 'verdict en marge'),
+      setCaptureA: () => this.setState({ vCapture: 'feuille' }),
+      setCaptureB: () => this.setState({ vCapture: 'séquence' }),
+      setQuestionA: () => this.setState({ vQuestion: 'pleine page', sheet: st.sheet === 'question' ? null : st.sheet }),
+      setQuestionB: () => this.setState({ vQuestion: 'feuille', screen: st.screen === 'question' ? 'registre' : st.screen }),
+      setRegistreA: () => this.setState({ vRegistre: 'mêlé' }),
+      setRegistreB: () => this.setState({ vRegistre: 'verdict en marge' })
+    };
+  }
+
+  saveEntry() {
+    const d = this.state.draft;
+    if (!d.name.trim()) { this.setState({ draftError: "Nommez l'objet : c'est la seule chose obligatoire." }); return; }
+    const entry = {
+      id: 'n' + Date.now(),
+      name: d.name.trim(),
+      price: d.price ? Number(d.price) : 0,
+      where: d.where.trim() || '—',
+      why: d.why.trim() || 'Aucune raison écrite.',
+      verdict: null,
+      inscrit: '2026-08-14'
+    };
+    const ask = this.addDays(this.today(), this.delai());
+    this.setState({
+      entries: [entry, ...this.state.entries],
+      sheet: null, step: 0, draftError: '',
+      draft: { name: '', price: '', where: '', why: '' },
+      screen: 'registre',
+      notice: { title: 'Inscrit, pas acheté.', body: 'La question reviendra le ' + this.long(ask) + ' : y pensez-vous encore ?' }
+    });
+  }
+}
+</script>
+</body>
+</html>
+
