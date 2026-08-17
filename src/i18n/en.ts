@@ -46,7 +46,7 @@ handheld console | game | The morning commute, forty minutes.`,
   'app.intro.label': 'first run',
   'app.intro.oneTitle': 'This is not a wishlist.',
   'app.intro.oneBody':
-    'An urge is written down here the moment you give it up — never the moment it arrives. A list of things you want would be a shopping list in disguise.',
+    'An urge is written down here the moment you give it up, never the moment it arrives. A list of things you want would be a shopping list in disguise.',
   'app.intro.twoTitle': 'Thirty days later, one question.',
   'app.intro.twoBody':
     'Do you still think about it? Three possible answers: forgotten, faintly, still. That answer, and nothing else, says something true.',
@@ -191,7 +191,7 @@ handheld console | game | The morning commute, forty minutes.`,
   'app.review.moneyNote':
     'This total is not a saving. It is only the sum of what you did not buy, and it says nothing about what you really wanted.',
   'app.review.moneyHidden':
-    'Prices are not asked for: nothing to total up, and that is quite all right.',
+    'Prices are not asked for: there is nothing to total up.',
 
   // ————— app · settings —————
   'app.settings.title': 'settings',
@@ -388,19 +388,19 @@ handheld console | game | The morning commute, forty minutes.`,
     'Why urge. only writes down refusals, why the question comes thirty days later, and where the data lives.',
   'site.about.title': 'One question, asked at the right moment.',
   'site.about.lede':
-    'urge. is not trying to make you spend less. It is trying to find out what you really wanted — and the only way to know is to wait.',
+    'urge. is not trying to make you spend less. It is trying to find out what you really wanted, and the only way to know is to wait.',
   'site.about.whyTitle': 'Why thirty days',
   'site.about.whyBody':
-    'An impulse almost never survives a month. Asked on the day itself, the question says nothing: everything looks necessary the moment you want it. Thirty days later the answer is clear, and it comes in one word. The delay can be set — fifteen, thirty or sixty days — but it does not go below fifteen: any shorter and you are still questioning the urge, not the memory of it.',
+    'An impulse almost never survives a month. Asked on the day itself, the question says nothing: everything looks necessary the moment you want it. Thirty days later the answer is clear, and it comes in one word. The delay can be set — fifteen, thirty or sixty days — but it does not go below fifteen days: any shorter and you are still questioning the urge rather than the memory of it.',
   'site.about.noTitle': 'Why this is not a wishlist',
   'site.about.noBody':
-    'A list of things you want is a deferred shopping list: you go back to it to buy. Here the line is only written after the refusal. Nothing in it is waiting to be bought, and the app offers no way to say “actually, I got it in the end” — that would turn a register into a regret.',
+    'A list of things you want is a deferred shopping list: you go back to it to buy. Here the line is only written after the refusal. Nothing in it is waiting to be bought, and the app offers no way to say “actually, I got it in the end”: a register has no business counting relapses.',
   'site.about.moneyTitle': 'Why the total is not a saving',
   'site.about.moneyBody':
-    'The sum of what you did not buy is in the review, because hiding it would be coy. But it is never presented as a gain: money not spent is not money earned, and an urge forgotten at four pounds teaches you as much as one at four hundred.',
+    'The sum of what you did not buy is in the review: hiding it would be pretending it cannot be worked out. But it is never presented as a gain: money not spent is not money earned, and an urge forgotten at four pounds teaches you as much as one at four hundred.',
   'site.about.dataTitle': 'Where the data lives',
   'site.about.dataBody':
-    'Everything is in your browser’s local storage, under a single key, in exactly the format the export produces. No account, no server, no network request in use. Clearing the site data deletes everything, permanently: that is the price of having no one to entrust it to. Export from time to time.',
+    'Everything is in your browser’s local storage, under a single key, in exactly the format the export produces. No account, no server, no network request in use. Clearing the site data deletes everything, permanently. That is what having no server costs. Export from time to time.',
   'site.about.familyTitle': 'The “.” family',
   'site.about.familyBody':
     'urge. belongs to a family of micro-apps sharing one system: monospace, right angles, two greys and an ink, no illustration, no shadow, no emoji. Each does one thing and refuses to do two.',

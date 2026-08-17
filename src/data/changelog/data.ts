@@ -20,9 +20,9 @@ export const changelogVersions: ChangelogVersion[] = [
         {
           category: 'la question',
           categoryEn: 'the question',
-          text: "Trente jours après le renoncement, une question, une seule : y pensez-vous encore ? Trois réponses — oublié, vaguement, toujours — données une fois et sans retour. La phrase écrite le jour du renoncement est relue au-dessus : sans elle, on répondrait à un nom d'objet plutôt qu'à une envie",
+          text: "Trente jours après le renoncement, une question, une seule : y pensez-vous encore ? Trois réponses : oublié, vaguement, toujours, données une fois et sans retour. La phrase écrite le jour du renoncement est relue au-dessus : sans elle, on répondrait à un nom d'objet plutôt qu'à une envie",
           textEn:
-            'Thirty days after giving it up, one question and only one: do you still think about it? Three answers — forgotten, faintly, still — given once, with no going back. The sentence written on the day is read again above it: without it you would be answering a product name rather than an urge',
+            'Thirty days after giving it up, one question and only one: do you still think about it? Three answers: forgotten, faintly, still, given once and with no going back. The sentence written on the day is read again above it: without it you would be answering a product name rather than an urge',
         },
         {
           category: 'la date de la question',
@@ -39,11 +39,18 @@ export const changelogVersions: ChangelogVersion[] = [
             'Above 900 px, two panels: the register on the left, whatever you are looking at on the right. Opening a line does not leave the register, and the panel asks the oldest due question by itself when it has nothing else to show. Below that, one screen at a time, the writing sheet comes up from the bottom and the primary action stays under your thumb',
         },
         {
+          category: 'une envie en détail',
+          categoryEn: 'one urge in full',
+          text: "Ce qu'elle était, ce qu'on en a dit, ce qui lui est arrivé, et une chronologie en trois temps. Rien n'y est modifiable : une ligne inscrite est un fait daté, et la corriger reviendrait à réécrire ce qu'on pensait ce jour-là. Elle se retire entièrement, derrière une confirmation, ou elle reste telle quelle",
+          textEn:
+            'What it was, what you said about it, what became of it, and a three-step timeline. Nothing there is editable: a written line is a dated fact, and correcting it would mean rewriting what you thought that day. It is removed whole, behind a confirmation, or it stays as it is',
+        },
+        {
           category: 'le bilan',
           categoryEn: 'the review',
-          text: "Le bilan d'un mois : ce que vous avez répondu d'abord, le registre ensuite, les montants en dernier. Les réponses sont comptées au jour où elles ont été données — un mois compte ce qu'on y a jugé, pas ce qu'on aurait dû y juger. Le total existe mais n'est jamais présenté comme une économie",
+          text: "Le bilan d'un mois : ce que vous avez répondu d'abord, le registre ensuite, les montants en dernier. Les réponses sont comptées au jour où elles ont été données : un mois compte ce qu'on y a jugé, pas ce qu'on aurait dû y juger. Le total existe mais n'est jamais présenté comme une économie",
           textEn:
-            'A month in review: what you answered first, the register next, the amounts last. Answers are counted on the day they were given — a month counts what you judged in it, not what you should have judged. The total exists but is never shown as a saving',
+            'A month in review: what you answered first, the register next, the amounts last. Answers are counted on the day they were given: a month counts what you judged in it, not what you should have judged. The total exists but is never shown as a saving',
         },
         {
           category: 'les réglages',
@@ -97,9 +104,9 @@ export const changelogVersions: ChangelogVersion[] = [
         {
           category: 'le système',
           categoryEn: 'the design system',
-          text: "La famille « . » 1.2.0 en tokens CSS : couleur, typographie, espace, forme, mouvement, et les composants partagés. urge. n'ajoute aucune couleur au tronc commun — son vocabulaire est fait de mots, jamais de teintes",
+          text: "La famille « . » 1.2.0 en tokens CSS : couleur, typographie, espace, forme, mouvement, et les composants partagés. urge. n'ajoute aucune couleur au tronc commun ; son vocabulaire est fait de mots",
           textEn:
-            'The “.” family 1.2.0 as CSS tokens: colour, typography, space, shape, motion, and the shared components. urge. adds no colour to the common trunk — its vocabulary is made of words, never of hues',
+            'The “.” family 1.2.0 as CSS tokens: colour, typography, space, shape, motion, and the shared components. urge. adds no colour to the common trunk; its vocabulary is made of words',
         },
         {
           category: 'les tests',
@@ -113,9 +120,9 @@ export const changelogVersions: ChangelogVersion[] = [
         {
           category: 'le rappel',
           categoryEn: 'the reminder',
-          text: "Le « rappel » esquissé dans la maquette est remplacé par un réglage qui existe vraiment : « poser la question — à l'ouverture ou quand je la demande ». Une application sans serveur ne peut pas réveiller un téléphone à 9 h, et un interrupteur qui promet une notification que le programme n'enverra jamais est un mensonge de plus dans une interface qui en refuse partout ailleurs",
+          text: "Le « rappel » esquissé dans la maquette est remplacé par un réglage qui existe vraiment : « poser la question — à l'ouverture ou quand je la demande ». Une application sans serveur ne peut pas réveiller un téléphone à 9 h, et le reste de l'interface se refuse à promettre ce qu'elle ne peut pas tenir",
           textEn:
-            'The “reminder” sketched in the mock-up is replaced by a setting that actually exists: “ask the question — when I open the app, or when I ask for it”. An app with no server cannot wake a phone at 9 a.m., and a switch promising a notification the program will never send is one more lie in an interface that refuses them everywhere else',
+            'The “reminder” sketched in the mock-up is replaced by a setting that actually exists: “ask the question — when I open the app, or when I ask for it”. An app with no server cannot wake a phone at 9 a.m., and the rest of the interface refuses to promise anything it cannot do',
         },
       ],
     },

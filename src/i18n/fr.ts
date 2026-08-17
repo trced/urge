@@ -47,7 +47,7 @@ console portable | micromania | Le trajet du matin, quarante minutes.`,
   'app.intro.label': 'premier lancement',
   'app.intro.oneTitle': "Ce n'est pas une liste d'envies.",
   'app.intro.oneBody':
-    "Une envie s'inscrit ici au moment où vous y renoncez — jamais au moment où elle arrive. Une liste d'objets désirés serait une liste de courses déguisée.",
+    "Une envie s'inscrit ici au moment où vous y renoncez, jamais au moment où elle arrive. Une liste d'objets désirés serait une liste de courses déguisée.",
   'app.intro.twoTitle': 'Trente jours plus tard, une question.',
   'app.intro.twoBody':
     "Y pensez-vous encore ? Trois réponses possibles : oublié, vaguement, toujours. C'est cette réponse, et rien d'autre, qui dit quelque chose de vrai.",
@@ -193,7 +193,7 @@ console portable | micromania | Le trajet du matin, quarante minutes.`,
   'app.review.moneyNote':
     "Ce total n'est pas une économie. C'est seulement la somme de ce que vous n'avez pas acheté, et elle ne dit rien de ce que vous vouliez vraiment.",
   'app.review.moneyHidden':
-    'Les prix ne sont pas demandés : rien à totaliser, et c’est très bien ainsi.',
+    "Les prix ne sont pas demandés : il n'y a rien à totaliser.",
 
   // ————— application · réglages —————
   'app.settings.title': 'réglages',
@@ -390,19 +390,19 @@ console portable | micromania | Le trajet du matin, quarante minutes.`,
     "Pourquoi urge. n'inscrit que les renoncements, pourquoi la question vient trente jours plus tard, et où vivent les données.",
   'site.about.title': 'Une question, posée au bon moment.',
   'site.about.lede':
-    "urge. ne cherche pas à vous faire dépenser moins. Il cherche à savoir ce que vous vouliez vraiment — et la seule façon de le savoir est d'attendre.",
+    "urge. ne cherche pas à vous faire dépenser moins. Il cherche à savoir ce que vous vouliez vraiment, et la seule façon de le savoir est d'attendre.",
   'site.about.whyTitle': 'Pourquoi trente jours',
   'site.about.whyBody':
-    "Une envie d'impulsion ne survit presque jamais à un mois. Posée le jour même, la question ne dit rien : tout paraît nécessaire au moment où on le désire. Trente jours plus tard, la réponse est nette, et elle se donne en un mot. Le délai se règle — quinze, trente ou soixante jours — mais il ne descend pas sous quinze : en deçà, on interroge encore l'envie, pas son souvenir.",
+    "Une envie d'impulsion ne survit presque jamais à un mois. Posée le jour même, la question ne dit rien : tout paraît nécessaire au moment où on le désire. Trente jours plus tard, la réponse est nette, et elle se donne en un mot. Le délai se règle — quinze, trente ou soixante jours — mais il ne descend pas sous quinze jours : en deçà, on interroge encore l'envie plutôt que son souvenir.",
   'site.about.noTitle': "Pourquoi ce n'est pas une liste d'envies",
   'site.about.noBody':
-    "Une liste d'objets désirés est une liste de courses différée : on y revient pour acheter. Ici, la ligne ne s'écrit qu'après le renoncement. Rien n'y attend d'être acheté, et l'application n'offre aucun moyen de dire « finalement, je l'ai pris » — ce serait transformer un registre en remords.",
+    "Une liste d'objets désirés est une liste de courses différée : on y revient pour acheter. Ici, la ligne ne s'écrit qu'après le renoncement. Rien n'y attend d'être acheté, et l'application n'offre aucun moyen de dire « finalement, je l'ai pris » : un registre n'a pas à tenir le compte des rechutes.",
   'site.about.moneyTitle': "Pourquoi le total n'est pas une économie",
   'site.about.moneyBody':
-    "La somme de ce que vous n'avez pas acheté existe dans le bilan, parce que la cacher serait une coquetterie. Mais elle n'est jamais présentée comme un gain : l'argent non dépensé n'est pas de l'argent gagné, et une envie oubliée à quatre euros vous apprend autant qu'une à quatre cents.",
+    "La somme de ce que vous n'avez pas acheté existe dans le bilan : la cacher reviendrait à faire semblant qu'elle n'est pas calculable. Mais elle n'est jamais présentée comme un gain : l'argent non dépensé n'est pas de l'argent gagné, et une envie oubliée à quatre euros vous apprend autant qu'une à quatre cents.",
   'site.about.dataTitle': 'Où vivent les données',
   'site.about.dataBody':
-    "Tout est dans le stockage local de votre navigateur, sous une seule clé, dans le format exact que produit l'export. Aucun compte, aucun serveur, aucune requête réseau à l'usage. Effacer les données du site supprime tout, définitivement : c'est le prix de n'avoir personne à qui les confier. Exportez de temps en temps.",
+    "Tout est dans le stockage local de votre navigateur, sous une seule clé, dans le format exact que produit l'export. Aucun compte, aucun serveur, aucune requête réseau à l'usage. Effacer les données du site supprime tout, définitivement. C'est ce que coûte l'absence de serveur. Exportez de temps en temps.",
   'site.about.familyTitle': 'La famille « . »',
   'site.about.familyBody':
     "urge. fait partie d'une famille de micro-applications qui partagent un même système : monospace, angles droits, deux gris et une encre, aucune illustration, aucune ombre, aucun emoji. Chacune fait une seule chose et refuse d'en faire deux.",
