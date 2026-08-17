@@ -1,0 +1,331 @@
+/* app.css — la coque de urge.
+   Deux panneaux au-delà de 900 px : le registre à gauche, ce qu'on
+   regarde à droite. En dessous, un écran à la fois, et la navigation du
+   haut suffit à revenir. Aucune cible sous 44 px au doigt. */
+
+.app {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--color-bg);
+  color: var(--color-ink);
+  isolation: isolate;
+}
+
+/* Route /app : l'application occupe la fenêtre et défile en interne.
+   `flex: none` est nécessaire — dans un conteneur flex en colonne, un
+   `flex-basis` remplacerait `height` et la hauteur redeviendrait
+   indéfinie, ce qui laisserait le registre pousser la page entière. */
+.app--page {
+  flex: none;
+  height: 100dvh;
+  width: 100%;
+}
+
+/* Encart de la page de présentation : le vrai composant, en 390 × 844. */
+.app--embedded {
+  width: 390px;
+  max-width: 100%;
+  height: 844px;
+  border: var(--rule-width) solid var(--color-ink);
+}
+
+.app__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding: var(--space-4) var(--screen-margin) var(--space-3);
+  padding-top: calc(var(--space-4) + env(safe-area-inset-top));
+  border-bottom: var(--rule-width) solid var(--color-ink);
+}
+
+.app__brand {
+  display: inline-flex;
+  align-items: center;
+  font-size: var(--text-brand);
+  letter-spacing: var(--tracking-brand);
+  min-height: 32px;
+}
+
+/* Les destinations : des libellés texte, jamais une pastille ni un fond.
+   Le trait existe déjà en transparent au repos, sinon le survol décalerait. */
+.app__tabs {
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+  flex: 0 0 auto;
+}
+
+.app__tab {
+  min-height: var(--touch-target);
+  display: inline-flex;
+  align-items: center;
+  font-size: var(--text-label);
+  color: var(--color-muted-strong);
+  border-bottom: var(--rule-width) solid transparent;
+  transition: color var(--motion-micro) linear;
+}
+
+.app__tab:hover {
+  color: var(--color-ink);
+  border-bottom-color: var(--color-ink);
+}
+
+.app__tab[aria-current='page'] {
+  color: var(--color-ink);
+  border-bottom-color: var(--color-ink);
+}
+
+/* Bandeau du mode exemple : dit ce qu'il est, offre la sortie. */
+.app__demo {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--space-2) var(--space-4);
+  padding: var(--space-2) var(--screen-margin);
+  border-bottom: var(--rule-width) solid var(--color-rule);
+  font-size: var(--text-meta);
+  color: var(--color-muted-strong);
+}
+
+/* — les deux panneaux — */
+
+/* Le conteneur des feuilles : c'est lui que le scrim recouvre, et lui
+   seul. L'en-tête reste lisible pendant qu'une feuille est ouverte. */
+.app__body {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  width: 100%;
+  max-width: var(--container-max);
+}
+
+/* Le registre. Il ne s'élargit pas indéfiniment : au-delà, une ligne de
+   soixante caractères se lirait mal, et la place appartient au panneau. */
+.app__list {
+  flex: 1 1 var(--app-list-width);
+  min-width: 0;
+  min-height: 0;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.app--wide .app__list {
+  max-width: var(--app-list-width);
+  border-right: var(--rule-width) solid var(--color-rule);
+}
+
+.app__panel {
+  flex: 1 1 380px;
+  min-width: 0;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  display: flex;
+  flex-direction: column;
+}
+
+/* — le registre — */
+
+.register {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.register__head {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-5) var(--screen-margin) var(--space-4);
+}
+
+.register__scroll {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.register__due {
+  padding: 0 var(--screen-margin);
+  border-top: var(--rule-width) solid var(--color-rule);
+}
+
+.register__notice {
+  border-top: var(--rule-width) solid var(--color-rule);
+}
+
+.register__notice-action {
+  padding: 0 var(--screen-margin) var(--space-4);
+}
+
+.register__list {
+  padding: var(--space-2) var(--screen-margin)
+    calc(var(--space-8) + env(safe-area-inset-bottom));
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+/* L'action primaire reste collée sous le pouce, quelle que soit la
+   longueur du registre. */
+.register__foot {
+  position: sticky;
+  bottom: 0;
+  background: var(--color-bg);
+  border-top: var(--rule-width) solid var(--color-ink);
+  padding: var(--space-4) var(--screen-margin);
+  padding-bottom: calc(var(--space-4) + env(safe-area-inset-bottom));
+}
+
+/* — les sections du panneau — */
+
+.panel {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  padding: var(--space-5) var(--screen-margin)
+    calc(var(--space-8) + env(safe-area-inset-bottom));
+}
+
+.panel__block {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.panel__head {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding-bottom: var(--space-4);
+  border-bottom: var(--rule-width) solid var(--color-ink);
+}
+
+/* — la question — */
+
+/* Elle occupe sa colonne en entier : c'est la seule chose à faire quand
+   elle est à l'écran, et rien ne doit venir à côté. */
+.question {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--space-8);
+  padding: var(--space-6) var(--screen-margin)
+    calc(var(--space-6) + env(safe-area-inset-bottom));
+}
+
+.question__top {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.question__line {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+
+.question__subject {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding-bottom: var(--space-5);
+  border-bottom: var(--rule-width) solid var(--color-ink);
+}
+
+.question__foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-6);
+}
+
+/* — rien à répondre — */
+
+.idle {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--space-10);
+  padding: var(--space-10) var(--screen-margin);
+}
+
+.idle__text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  max-width: var(--measure-text);
+}
+
+.idle__figures {
+  max-width: 380px;
+  width: 100%;
+}
+
+/* — premier lancement — */
+
+.intro {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--space-10);
+  padding: var(--space-10) var(--screen-margin)
+    calc(var(--space-8) + env(safe-area-inset-bottom));
+  max-width: var(--panel-measure);
+}
+
+.intro__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.intro__step {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.intro__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+}
+
+/* — la feuille d'inscription — */
+
+.capture__row {
+  display: flex;
+  gap: var(--space-4);
+}
+
+.capture__price {
+  flex: 0 0 108px;
+  min-width: 0;
+}
+
+.capture__where {
+  flex: 1 1 auto;
+  min-width: 0;
+}
