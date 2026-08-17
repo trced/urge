@@ -19,7 +19,7 @@ export const en: Record<MessageKey, string> = {
 
   // ————— app · example mode —————
   'app.demo.label': 'example',
-  'app.demo.note': 'nothing is written to this device',
+  'app.demo.note': 'nothing is saved on this device',
   'app.demo.leave': 'open my register',
   'app.demo.entries': `wool jacket, second hand | vinted | It was exactly my size.
 35 mm lens | digit-photo | To photograph people, not landscapes.
@@ -227,7 +227,7 @@ handheld console | game | The morning commute, forty minutes.`,
   'app.settings.send': 'send the register',
   'app.settings.sendValue': 'to an app',
   'app.settings.import': 'import a register',
-  'app.settings.importValue': 'urge.json',
+  'app.settings.importValue': 'choose a file',
   'app.settings.intro': 'see the introduction again',
   'app.settings.introValue': 'three screens',
   'app.settings.erase': 'erase the register',
@@ -302,7 +302,7 @@ handheld console | game | The morning commute, forty minutes.`,
   'site.nav.home': 'overview',
   'site.nav.about': 'about',
   'site.nav.changelog': 'changelog',
-  'site.nav.app': 'the app',
+  'site.nav.app': 'open the app',
   'site.nav.source': 'source code',
   'site.nav.lang': 'FR',
   'site.nav.langAria': 'passer en français',
@@ -412,7 +412,7 @@ handheld console | game | The morning commute, forty minutes.`,
   'site.changelog.metaTitle': 'changelog — urge.',
   'site.changelog.metaDescription':
     'What changed in urge., version by version.',
-  'site.changelog.title': 'changelog',
+  'site.changelog.title': 'Changelog',
   'site.changelog.lede':
     'What changed, in plain words. Versions follow semantic versioning; the full log is in the repository.',
   'site.changelog.type.added': 'added',
@@ -478,7 +478,7 @@ handheld console | game | The morning commute, forty minutes.`,
 
   // ————— site · missing page —————
   'site.notfound.metaTitle': 'page not found — urge.',
-  'site.notfound.metaDescription': 'This page does not exist.',
+  'site.notfound.metaDescription': 'This address matches no page.',
   'site.notfound.title': 'This page does not exist.',
   'site.notfound.body':
     'The link may be old, or the address mistyped. The register, though, is still there.',
